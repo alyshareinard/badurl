@@ -12,14 +12,15 @@ def clean_URL(url):
         return("")
 
 def process_files(badurl_file, project_file):
+
+    badURL_df = pd.read_csv(badurl_file)
+    project_df=pd.read_csv(project_file)
     if 'Website' not in project_df:
         st.write("Project table must have column header 'Website'")
         return
     if 'Website' not in badurl_file:
         st.write("Badurl table must have column header 'Website'")
         return
-    badURL_df = pd.read_csv(badurl_file)
-    project_df=pd.read_csv(project_file)
     badurls = []
     for i in range(len(badURL_df)):
     #    print("item", badURL_df["Main domain name"][i])
