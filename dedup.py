@@ -12,6 +12,12 @@ def clean_URL(url):
         return("")
 
 def process_files(badurl_file, project_file):
+    if 'Website' not in project_df:
+        st.write("Project table must have column header 'Website'")
+        return
+    if 'Website' not in badurl_file:
+        st.write("Badurl table must have column header 'Website'")
+        return
     badURL_df = pd.read_csv(badurl_file)
     project_df=pd.read_csv(project_file)
     badurls = []
@@ -24,8 +30,7 @@ def process_files(badurl_file, project_file):
     good_records = []
     for i in range(len(project_df)):
     #    print(projectrecords['Main domain name'][i])
-        if 'Website' not in project_df:
-            st.write("table must have column header 'Website'")
+
 #        print(type(project_df['Website'][i]))
         p_url = clean_URL(project_df['Website'][i])
         if p_url == "" or p_url not in badurls:
