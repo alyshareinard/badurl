@@ -17,10 +17,10 @@ def process_files(badurl_file, project_file):
     project_df=pd.read_csv(project_file)
     if 'Website' not in project_df:
         st.write("Project table must have column header 'Website'")
-        return
+        return([])
     if 'Website' not in badurl_file:
         st.write("Badurl table must have column header 'Website'")
-        return
+        return([])
     badurls = []
     for i in range(len(badURL_df)):
     #    print("item", badURL_df["Main domain name"][i])
@@ -58,18 +58,18 @@ if time_to_process:
 
     #print(badURL_df)
 
+    if len(output_file)>0:
+        @st.cache
+        def convert_df(df):
+            # IMPORTANT: Cache the conversion to prevent computation on every rerun
+            return df.to_csv().encode('utf-8')
 
-    @st.cache
-    def convert_df(df):
-        # IMPORTANT: Cache the conversion to prevent computation on every rerun
-        return df.to_csv().encode('utf-8')
+        csv = convert_df(output_file)
 
-    csv = convert_df(output_file)
-
-    st.download_button(
-        label="Download data as CSV",
-        data=csv,
-        file_name='cleaned_records.csv',
-        mime='text/csv',
-    )
+        st.download_button(
+            label="Download data as CSV",
+            data=csv,
+            file_name='cleaned_records.csv',
+            mime='text/csv',
+        )
 
