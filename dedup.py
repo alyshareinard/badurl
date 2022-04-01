@@ -63,7 +63,7 @@ if time_to_process:
     st.download_button(
         label="Download data as CSV",
         data=csv,
-        file_name='large_df.csv',
+        file_name='cleaned_records.csv',
         mime='text/csv',
     )
 
