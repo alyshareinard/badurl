@@ -18,7 +18,8 @@ def process_files(badurl_file, project_file):
     if 'Website' not in project_df:
         st.write("Project table must have column header 'Website'")
         return([])
-    if 'Website' not in badurl_file:
+    if 'Website' not in badURL_df:
+
         st.write("Badurl table must have column header 'Website'")
         return([])
     badurls = []
@@ -27,7 +28,7 @@ def process_files(badurl_file, project_file):
 
         badurls.append(clean_URL(badURL_df["Website"][i]))
 
-    print("badURLS", badurls)
+#    print("badURLS", badurls)
     good_records = []
     for i in range(len(project_df)):
     #    print(projectrecords['Main domain name'][i])
